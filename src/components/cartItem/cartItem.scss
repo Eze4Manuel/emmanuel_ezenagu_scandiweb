@@ -1,0 +1,89 @@
+.Cartitem {
+    padding: 20px 0px 20px 0px;
+    border-bottom: 0.5px solid lightgrey;
+    min-height: 100px;
+    .cartitem-container {
+        display: flex;
+        flex-direction: row;
+        min-height: 130px;
+        .cartitem-content {
+            flex-grow: 3;
+            width: 60%;
+            div {
+                margin-top: 10px;
+            }
+            div.size {
+                div ul {
+                    display: flex;
+                    padding: 0px;
+                    list-style: none;
+                    flex-wrap: wrap;
+                    margin-bottom: 0px;
+                    li {
+                        margin-right: 3px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            div.color {
+                span div {
+                    margin: 10px 0px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                }
+            }
+            div.price {
+                margin-bottom: 20px;
+                span div {
+                    margin: 5px 0px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                }
+            }
+        }
+        .cartitem-counter {
+            width: 10%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0px 10px;
+            cursor: pointer;
+            max-width: 30px;
+            div {
+                font-size: 20px;
+                font-weight: 500;
+                text-align: center;
+                width: 15px;
+                text-align: center;
+            }
+            .counter{
+                width: 100%;
+            }
+        }
+        .cartitem-image {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 30%;
+            height: inherit;
+            max-width: 200px;
+            span{
+                background-color: #000;
+                margin: 2px;
+                padding-top: 2px;
+                position: relative;
+                z-index: 0;
+                top: 85%;
+                left: 65%;
+                img{
+                    width: 15px;
+                    height: 15px;
+                    margin: auto;
+                }
+            }
+        }
+    }
+}

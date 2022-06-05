@@ -1,0 +1,26 @@
+@import "../../index.scss";
+ 
+.bordered {
+    border: 1.5px solid black;
+    padding: 4px 10px;
+}
+.borderedSelected {
+    border: 1.5px solid black;
+    padding: 4px 10px;
+    color: #fff;
+    background-color: #000;
+}
+
+.box-colored {
+    width: 30px;
+    height: 30px;
+    margin: 0px 3px 0px 0px !important;
+    border: 0.5px solid lightgray;
+}
+
+.box-colored-selected {
+    width: 27px;
+    height: 27px;
+    margin: 0px 3px 0px 0px !important;
+    border: 2px solid black;
+}

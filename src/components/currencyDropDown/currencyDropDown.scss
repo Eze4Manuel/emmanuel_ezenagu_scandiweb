@@ -1,0 +1,31 @@
+@import "../../index.scss";
+
+.CurrencyDropDown {
+    background-color: #fff;
+    box-shadow: 0px 4px 30px lightgray;
+    text-align: left;
+    position: absolute;
+    z-index: 1000;
+    top: 9%;
+    right: 15%;
+    padding: 10px 0px;
+    .currencyDropDown-container {
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+        flex-direction: row;
+        .currencyItem-content {
+            padding: 0px;
+            margin: 0px;
+            li {
+                padding: 10px 25px;
+                list-style: none;
+                cursor: pointer;
+                transition: 1s;
+            }
+            li:hover {
+                background-color: #eee;
+            }
+        }
+    }
+}

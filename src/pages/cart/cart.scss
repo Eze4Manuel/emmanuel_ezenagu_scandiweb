@@ -1,0 +1,47 @@
+@import "../../index.scss";
+
+.Cart {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    text-align: left;
+    .cart-container {    
+        .cart-bottom{
+            margin: 20px 0px 0px 0px;
+            padding-top: 15px;
+            div{
+                margin-top: 10px;  
+                margin-bottom: 10px;  
+                span{
+                    margin-right: 15px;
+                }            
+            }
+            div:last-of-type{
+                text-align: center;
+                display: flex;
+                justify-content: flex-start;
+                 button{
+                    padding: 10px 80px;
+                    border: none;
+                    font-size: 14px;
+                }                
+                button.checkout-button{
+                    background-color: $primary-color-green;
+                    color: #fff;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}
+
+.bordered {
+    border: 1.5px solid black;
+    padding: 4px 10px;
+}
+.colored {
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px 0px 0px!important;
+    background-color: #000;
+} 

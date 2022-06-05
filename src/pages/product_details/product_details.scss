@@ -1,0 +1,74 @@
+@import "../../index.scss";
+
+.Product-details {
+    width: 100%;
+    height: 100%;
+    margin: 60px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    .left-panel {
+        display: flex;
+        flex-direction: row;
+        margin-right: 10px;
+        min-width: 400px;
+        width: 60%;
+        margin-right: auto;
+        .left-panel-list {
+            display: flex;
+            flex-direction: column;
+            div {
+                height: 87.61px;
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 100px;
+                margin: 10px;
+            }
+        }
+        .left-panel-image {
+            height: 459.59px;
+            width: 100%;
+            div {
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 459.59px;
+            }
+        }
+    }
+    .right-panel {
+        margin-left: 10px;
+        width: 30%;
+        margin-left: auto;
+        text-align: left;
+        div.size {
+            div ul {
+                display: flex;
+                padding: 0px;
+                list-style: none;
+                li {
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+        div.color {
+            span div {
+                margin: 10px 0px;
+                display: flex;
+                flex-direction: row;
+            }
+        }
+        div.price {
+            margin-bottom: 20px;
+            span div {
+                margin: 5px 0px;
+                display: flex;
+                flex-direction: row;
+                
+            }
+        }
+    }
+}

@@ -26,15 +26,20 @@ class Item extends React.Component {
     }
     handleAddToCart = (e, data) => {
         e.preventDefault();
+        
+        // returns all products in the cart that has same id with the product clicked to be added to cart
         let existingProducts = this.props.cart.products.filter((product, ind) => {
             return (product.product.id === this.props.data.id)
         })
+        // maps though existingProduct returning a transformed array object of product settings
         let mapSettingsProduct = existingProducts.map(product => {
             return product.setting
         })
+        // returns true if there is no presence of the product with same attributes in cart
         let checkMatch = mapSettingsProduct.every((elem) => {
             return !(this.checkAttributeSettings(elem, this.state.setting));
         });
+        // Add product to cart since product has unique attributes
         if (checkMatch) {
             this.props.addToCart({ product: this.props.data, setting: this.state.setting, counter: 1 })
         } else {

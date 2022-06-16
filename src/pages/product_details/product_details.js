@@ -38,15 +38,17 @@ class ProductDetails extends React.Component {
     let existingProducts = this.props.cart.products.filter((product, ind) => {
       return ((product.product.id === this.props.data.product.id))
     })
-    // maps though existingProduct returning a transformed array object
+    // maps though existingProduct returning a transformed array object of product settings
     let mapSettingsProduct = existingProducts.map(product => {
       return product.setting
     })
+    // returns true if there is no presence of the product with same attributes in cart
     let checkMatch = mapSettingsProduct.every((elem) => {
       return !(this.checkAttributeSettings(elem, this.state.setting));
     });
 
     if (checkMatch) {
+      // Add product to cart since product has unique attributes
       this.props.addToCart({ product: this.props.data.product, setting: this.state.setting, counter: 1 })
     } else {
       // Since product already exist in the cart, increment at the position where the inserted object matches 
@@ -82,7 +84,7 @@ class ProductDetails extends React.Component {
     return match;
   }
 
-  // slider function to switch to the next image
+  // slider function to switch gallery to the next image
   nextImage = () => {
     if (this.state.totalImages - 1 > this.state.currentImage) {
       this.setState((prevState) => {
@@ -90,7 +92,7 @@ class ProductDetails extends React.Component {
       })
     }
   }
-  // slider function to switch to the previous image
+  // slider function to switch gallery to the previous image
   previousImage = () => {
     if (this.state.currentImage !== 0) {
       this.setState((prevState) => {

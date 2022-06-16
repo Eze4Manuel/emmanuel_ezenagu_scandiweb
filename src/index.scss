@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$primary-color: #525dce;
+$primary-background: #222;
+$primary-color-green: #5ECE7B;
+
+
 #root{
   animation : none;
     animation-delay : 0;
@@ -157,19 +163,26 @@ body {
   max-width: 100%;
   margin: 0;
   font-family: 'Raleway', sans-serif;
-
-  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  //   sans-serif;
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 3px;
+    // display: none;
+  }
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+    ::-webkit-scrollbar-thumb {
+     background: $primary-color-green; 
+    border-radius:10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #eee; 
+  } 
 } 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-$primary-color: #525dce;
-$primary-background: #222;
-$primary-color-green: #5ECE7B;
-
+.translucent {
+  opacity: 0.3;
+}

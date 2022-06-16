@@ -14,9 +14,13 @@ class Header extends React.Component {
                 <div className='nav-left'>
                     <ul className='categories'>
                         {
-                            this.props.categories.map(elem => {
-                                return <li key={uuidv4()} onClick={() => this.props.changeCategory(elem.name)}><Link to={'/'}>{elem.name}</Link></li>
-                            })
+                            this.props.categories.map(elem => (
+                                <Link key={uuidv4()} to={`/${elem.name}`}>
+                                    <li onClick={() => this.props.changeCategory(elem.name)}>
+                                        {elem.name}
+                                    </li>
+                                </Link>
+                            ))
                         }
                     </ul>
                 </div>
@@ -28,9 +32,9 @@ class Header extends React.Component {
                         <ul onClick={() => this.props.showCurrency()}>
                             <li>$</li>
                             <li><img src={arrow_down} alt='' /></li>
-                        </ul> 
-                        <span>
-                            <img onClick={() => this.props.showCart()} src={cart} alt='' />
+                        </ul>
+                        <span onClick={() => this.props.showCart()}>
+                            <img src={cart} alt='' />
                             <span className="cart-badge">{this.props.cart.products.length}</span>
                         </span>
                     </div>

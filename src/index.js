@@ -14,19 +14,24 @@ import store from './redux/store';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+    }
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-
         <QueryCategories />
       </Provider>
     </ApolloProvider>
-  </React.StrictMode>
 );
 
 reportWebVitals();

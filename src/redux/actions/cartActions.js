@@ -1,26 +1,28 @@
-import { ADD_TO_CART, DECREMENT_COUNTER, INCREMENT_COUNTER, UPDATE_SETTINGS } from './types';
+import { ADD_TO_CART, INCREMENT_COUNTER_BY_POSITION, DECREMENT_COUNTER_BY_POSITION, UPDATE_SETTINGS } from './types';
 
 export const addToCart = (product) => dispatch => {
   dispatch({
     type: ADD_TO_CART,
     payload: product
   })
-}; 
-export const incrementCounter = (id, counter) => dispatch => {
+};  
+export const incrementCounterByPosition = (ind, counter) => dispatch => {
   dispatch({
-    type: INCREMENT_COUNTER,
-    payload: {id, counter}
+    type: INCREMENT_COUNTER_BY_POSITION,
+    payload: {ind, counter}
   })
 };
-export const decrementCounter = (id, counter) => dispatch => {
+
+export const decrementCounterByPosition = (ind, counter) => dispatch => {
   dispatch({
-    type: DECREMENT_COUNTER,
-    payload: {id, counter}
+    type: DECREMENT_COUNTER_BY_POSITION,
+    payload: {ind, counter}
   })
 };
-export const updateSettings = (id, setting) => dispatch => {
+
+export const updateSettings = (ind, setting) => dispatch => {
   dispatch({
     type: UPDATE_SETTINGS,
-    payload: {id, setting}
+    payload: {ind, setting}
   })
 };

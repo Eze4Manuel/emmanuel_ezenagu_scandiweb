@@ -1,9 +1,10 @@
 import React from 'react';
+import './mainContent.scss'
  
 class MainContent extends React.Component {
     render() {
         return (
-            <div className='main' style={{"paddingTop": "70px"}}>
+            <div className='main'>
                 {this.props.children} 
             </div>
         )

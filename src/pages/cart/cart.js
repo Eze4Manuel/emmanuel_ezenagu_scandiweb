@@ -3,8 +3,7 @@ import React from 'react';
 import './cart.scss';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { HeadingText, ParagraphText } from '../../components/Text/text';
-import { incrementCounter, decrementCounter, updateSettings } from '../../redux/actions/cartActions';
+import { incrementCounterByPosition, decrementCounterByPosition, updateSettings } from '../../redux/actions/cartActions';
 import CartItem from '../../components/cartItem/cartItem'
 
 class Cart extends React.Component {
@@ -41,54 +40,64 @@ class Cart extends React.Component {
         return (
             <div className='Cart'>
                 <div className='cart-container'>
-                    <HeadingText value={`CART`} styles={{ "fontSize": "32px", "textAlign": "left", "fontWeight": "700", "marginBottom": "20px" }} />
+                    <h1>CART</h1>
                     {
-                        this.props?.cart.products.map(elem => {
-                            return <CartItem data={elem} key={uuidv4()} selectedCurrency={this.props.selectedCurrency} culmulateSum={this.culmulateSum} updateSettings={this.props.updateSettings} incrementCounter={this.props.incrementCounter} decrementCounter={this.props.decrementCounter} />
+                        this.props?.cart.products.map((elem, ind) => {
+                            return <CartItem
+                                data={elem}
+                                index={ind}
+                                key={uuidv4()}
+                                selectedCurrency={this.props.selectedCurrency}
+                                culmulateSum={this.culmulateSum}
+                                updateSettings={this.props.updateSettings}
+                                incrementCounterByPosition={this.props.incrementCounterByPosition}
+                                decrementCounterByPosition={this.props.decrementCounterByPosition} />
                         })
                     }
                     <div className='cart-bottom'>
                         <div>
-                            <ParagraphText value={`Tax 21%: `} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "300", "display": "inline-block", "marginRight": "15px" }} />
+                            <p>Tax 21%:</p>
+
                             <span><b>
                                 {
                                     this.state.total.length > 0 ?
-                                    (this.state.total.find((elem) => {
-                                        return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                    })?.currency.symbol ?? '')
-                                    + " " +
-                                    (this.state.total.find((elem) => {
-                                        return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                    })?.amount * 0.21 ?? 0).toFixed(2)
-                                    :
-                                    0
+                                        (this.state.total.find((elem) => {
+                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                        })?.currency.symbol ?? '')
+                                        + " " +
+                                        (this.state.total.find((elem) => {
+                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                        })?.amount * 0.21 ?? 0).toFixed(2)
+                                        :
+                                        0
                                 }
                             </b>
                             </span>
                         </div>
                         <div>
-                            <ParagraphText value={`Quantity: `} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "300", "display": "inline-block", "marginRight": "15px" }} />
-                            <ParagraphText value={this.props?.cart.products.length} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "700", "display": "inline-block", "marginRight": "15px" }} />
+                            <p>Quantity: </p>
+                            <p> {this.props?.cart.products.length}</p>
                         </div>
                         {
                             this.state.total.length > 0 ?
                                 <span>
-                                    <ParagraphText value={`Total: `} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "700", "display": "inline-block", "marginRight": "15px" }} />
-                                    <ParagraphText value={
-                                        (this.state.total.find((elem) => {
-                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                        })?.currency.symbol)
-                                        + " " +
-                                        (this.state.total.find((elem) => {
-                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                        })?.amount).toFixed(2)
-                                    }
-                                        styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "700", "display": "inline-block" }} />
+                                    <p><b>Total: </b></p>
+                                    <p> <b>
+                                        {
+                                            " " + (this.state.total.find((elem) => {
+                                                return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                            })?.currency.symbol)
+                                            + " " +
+                                            (this.state.total.find((elem) => {
+                                                return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                            })?.amount).toFixed(2)
+                                        }
+                                    </b></p>
                                 </span>
                                 :
                                 <span>
-                                    <ParagraphText value={`Total: `} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "700", "display": "inline-block", "marginRight": "15px" }} />
-                                    <ParagraphText value={`0`} styles={{ "fontSize": "16px", "textAlign": "left", "fontWeight": "700", "display": "inline-block", "marginRight": "15px" }} />
+                                    <p><b>Total: </b></p>
+                                    <p><b> 0</b></p>
                                 </span>
                         }
                         <div>
@@ -105,4 +114,4 @@ const mapStateToProps = state => ({
     selectedCurrency: state.selectedCurrency,
     cart: state.cart,
 });
-export default connect(mapStateToProps, { incrementCounter, decrementCounter, updateSettings })(Cart);
+export default connect(mapStateToProps, { incrementCounterByPosition, decrementCounterByPosition, updateSettings })(Cart);

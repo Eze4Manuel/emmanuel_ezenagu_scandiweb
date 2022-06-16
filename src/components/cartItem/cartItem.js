@@ -1,6 +1,6 @@
 import React from 'react';
-import { BorderedBlock, ColoredBlock } from '../../components/CardBlock/cardBlock';
-import { HeadingText } from '../../components/Text/text';
+import BorderedBlock from '../block/borderedBlock/borderedBlock';
+import ColoredBlock from '../block/coloredBlock/coloredBlock';
 import { v4 as uuidv4 } from 'uuid';
 import './cartItem.scss'
 import backward from '../../assets/images/backward.png'; // with import    
@@ -18,6 +18,7 @@ class CartItem extends React.Component {
         this.setState(() => {
             return { totalImages: this.props.data.product.gallery.length }
         })
+
     }
     // slider function to switch to the next image
     nextImage = () => {
@@ -42,8 +43,8 @@ class CartItem extends React.Component {
                 <div className='cartitem-container'>
                     <div className='cartitem-content'>
                         <div>
-                            <HeadingText value={this.props.data.product.brand} styles={{ "fontSize": "20px", "fontWeight": "300", "marginBottom": "0px" }} />
-                            <HeadingText value={this.props.data.product.name} styles={{ "fontSize": "20px", "fontWeight": "300", "marginTop": "0px" }} />
+                            <h1>{this.props.data.product.brand}</h1>
+                            <h1>{this.props.data.product.name}</h1>
                         </div>
                         <div>
                             <span><b>
@@ -63,17 +64,17 @@ class CartItem extends React.Component {
                                 this.props.data.product.attributes.map((elem) => {
                                     return (
                                         <div key={uuidv4()}>
-                                            <HeadingText value={elem.name} styles={{ "fontSize": "16px", "fontWeight": "500" }} />
+                                            <h1>{elem.name}</h1>
                                             <div>
                                                 <ul>
                                                     {
                                                         (elem.id === 'Color') ?
                                                             elem.items.map((item) => {
-                                                                return <ColoredBlock key={item.id} id={item.id} clicked={(e) => this.props.updateSettings(this.props.data.product.id, { [elem.id]: item })} class={(this.props.data.setting[elem.name]?.id === item.id) ? "box-colored-selected" : 'box-colored'} styles={{ "backgroundColor": `${item.value}` }} />
+                                                                return <ColoredBlock key={item.id} id={item.id} clicked={(e) => this.props.updateSettings(this.props.index, { [elem.id]: item })} class={(this.props.data.setting[elem.name]?.id === item.id) ? "box-colored-selected" : 'box-colored'} styles={{ "backgroundColor": `${item.value}` }} />
                                                             })
                                                             :
                                                             elem.items.map((item) => {
-                                                                return <BorderedBlock key={item.id} id={item.id} clicked={(e) => { this.props.updateSettings(this.props.data.product.id, { [elem.id]: item }) }} class={this.props.data.setting[elem.name]?.id === item.id ? 'borderedSelected' : 'bordered'} value={item.value} />
+                                                                return <BorderedBlock key={item.id} id={item.id} clicked={(e) => { this.props.updateSettings(this.props.index, { [elem.id]: item }) }} class={this.props.data.setting[elem.name]?.id === item.id ? 'borderedSelected' : 'bordered'} value={item.value} />
                                                             })
                                                     }
                                                 </ul>
@@ -85,19 +86,24 @@ class CartItem extends React.Component {
                         </div>
                     </div>
                     <div className='cartitem-counter'>
-                        <div className='bordered' onClick={() => { this.props.incrementCounter(this.props.data.product.id, this.props.data.counter); this.props.culmulateSum() }}>+</div>
+                        <div className='bordered' onClick={() => { this.props.incrementCounterByPosition(this.props.index, this.props.data.counter); this.props.culmulateSum() }}>+</div>
                         <div className='counter'>{this.props.data.counter}</div>
-                        <div className='bordered' onClick={() => { this.props.decrementCounter(this.props.data.product.id, this.props.data.counter); this.props.culmulateSum() }}>-</div>
+                        <div className='bordered' onClick={() => { this.props.decrementCounterByPosition(this.props.index, this.props.data.counter); this.props.culmulateSum() }}>-</div>
                     </div>
-                    <div className='cartitem-image' style={{ backgroundImage: `url(${this.props.data.product.gallery[this.state.currentImage]})` }}>
-                        <span onClick={() => this.previousImage()}><img src={backward} alt={''} /></span>
-                        <span onClick={() => this.nextImage()}><img src={forward} alt={''}/></span>
+                    <div className='cartitem-image'>
+                        <img src={this.props.data.product.gallery[this.state.currentImage]} alt={'cart_product_item'} />
+                        {this.state.totalImages > 1 ?
+                            <div className='ward-buttons'>
+                                <span onClick={() => this.previousImage()}><img src={backward} alt={'backward_icon'} /></span>
+                                <span onClick={() => this.nextImage()}><img src={forward} alt={'forward_icon'} /></span>
+                            </div>
+                            :
+                            null
+                        }
                     </div>
                 </div>
             </div>
         )
     }
 }
-
-
 export default CartItem;

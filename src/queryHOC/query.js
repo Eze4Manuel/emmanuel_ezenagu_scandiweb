@@ -3,24 +3,39 @@ import Product from '../pages/products/product';
 import App from '../App.js';
 import { useQuery, gql } from "@apollo/client";
 import ProductDetails from '../pages/product_details/product_details';
-
+import './query.scss';
 export const QueryProduct = (props) => {
+  // getting param ID from query string
+  let pathname = window.location.pathname.split('/')[1];
+
   // Graphql query to get products based on categories
   const ProductQuery = gql`
     {
-        category(input: {title:"${props.selectedCategory}"} ){
+        category(input: {title:"${pathname}"} ){
           name,
           products{
                   id,
                   name,
                   inStock,
+                  category,
                   gallery,
+                  brand,
+                  attributes{
+                                id,
+                                name,
+                                type,
+                                items{
+                                  id,
+                                  value,
+                                  displayValue
+                                }
+                              },
                   prices{ 
                   amount,
                   currency{
                       label,
                       symbol
-                   }
+                  }
                   }
               }
         }
@@ -46,7 +61,6 @@ export const QueryProductDetails = (props) => {
             inStock,
             gallery,
             description,
-            category,
             attributes{
               id,
               name,

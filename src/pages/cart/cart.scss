@@ -5,27 +5,51 @@
     padding: 15px;
     background-color: #fff;
     text-align: left;
-    .cart-container {    
-        .cart-bottom{
+    .cart-container {
+        h1 {
+            font-size: 32px;
+            text-align: left;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .cart-bottom {
             margin: 20px 0px 0px 0px;
             padding-top: 15px;
-            div{
-                margin-top: 10px;  
-                margin-bottom: 10px;  
-                span{
+            div {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                display: flex;
+                p {
+                    font-size: 16px;
+                    text-align: left;
+                    font-weight: 300;
+                    display: inline-block;
                     margin-right: 15px;
-                }            
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                }
+                p:last-child {
+                    font-weight: 700;
+                }
             }
-            div:last-of-type{
+            span {
+                margin-right: 15px;
+                display: flex;
+                p{
+                    margin-right: 10px;
+
+                }
+            }
+            div:last-of-type {
                 text-align: center;
                 display: flex;
                 justify-content: flex-start;
-                 button{
+                button {
                     padding: 10px 80px;
                     border: none;
                     font-size: 14px;
-                }                
-                button.checkout-button{
+                }
+                button.checkout-button {
                     background-color: $primary-color-green;
                     color: #fff;
                     margin-left: 5px;
@@ -42,6 +66,6 @@
 .colored {
     width: 20px;
     height: 20px;
-    margin: 0px 10px 0px 0px!important;
+    margin: 0px 10px 0px 0px !important;
     background-color: #000;
-} 
+}

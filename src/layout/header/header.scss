@@ -19,18 +19,18 @@
             display: flex;
             padding: 0px;
             margin: 0px;
-            li {
-                list-style: none;
-                padding: 20px 15px;
-                font-size: 16px;
-                font-weight: 600;
-                font-family: "Raleway", sans-serif;
-                line-height: 19.2px;
-                text-transform: capitalize;
-                cursor: pointer;
-                a {
-                    text-decoration: none;
-                    color: #000;
+            a {
+                text-decoration: none;
+                color: #000;
+                li {
+                    list-style: none;
+                    padding: 20px 15px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    font-family: "Raleway", sans-serif;
+                    line-height: 19.2px;
+                    text-transform: capitalize;
+                    cursor: pointer;
                 }
             }
             li:hover {
@@ -62,6 +62,7 @@
                 align-items: center;
                 cursor: pointer;
                 margin: 0px;
+                padding-left: 0px;
                 li {
                     img {
                         margin: 0px;
@@ -69,6 +70,9 @@
                         height: 10px;
                     }
                 }
+            }
+            span{
+                cursor: pointer;
             }
             img {
                 width: 20px;

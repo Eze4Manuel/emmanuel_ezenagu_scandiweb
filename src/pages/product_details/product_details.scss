@@ -14,27 +14,67 @@
         min-width: 400px;
         width: 60%;
         margin-right: auto;
+
         .left-panel-list {
             display: flex;
             flex-direction: column;
+            max-height: 459.59px;
+            direction: rtl;
+            overflow: auto;
+            width: 20%;
+            min-width: 100px;
             div {
+                direction: ltr;
                 height: 87.61px;
                 background-position: center;
                 background-size: contain;
                 background-repeat: no-repeat;
                 width: 100px;
-                margin: 10px;
+                margin: 5px;
+                div img {
+                    object-fit: contain;
+                    width: inherit;
+                    height: inherit;
+                }
             }
         }
         .left-panel-image {
             height: 459.59px;
+            max-height: 459.59px;
             width: 100%;
-            div {
-                background-position: center;
-                background-size: contain;
-                background-repeat: no-repeat;
+            h1 {
+                font-weight: 400;
+                font-size: 24px;
+                position: relative;
+                top: 35%;
+            }
+            .item-image {
                 width: 100%;
                 height: 459.59px;
+                max-height: 459.59px;
+                overflow: auto;
+                img {
+                    width: inherit ;
+                    height: 400px;
+                    object-fit: contain;
+                }
+                div.ward_buttons {
+                    position: relative;
+                    z-index: 0;
+                    top: -25px;
+                    left: 70%;
+                    width: fit-content;
+                    span {
+                        background-color: #000;
+                        margin: 2px;
+                        padding-top: 2px;
+                        img {
+                            width: 15px;
+                            height: 15px;
+                            margin: auto;
+                        }
+                    }
+                }
             }
         }
     }
@@ -43,7 +83,23 @@
         width: 30%;
         margin-left: auto;
         text-align: left;
+        div.title {
+            h1 {
+                font-size: 30px;
+                margin-bottom: 0px;
+                margin-top: 0px;
+            }
+            h1:last-of-type {
+                font-size: 30px;
+                margin-bottom: 0px;
+                margin-top: 0px;
+                font-weight: 300;
+            }
+        }
         div.size {
+            h1 {
+                font-size: 18px;
+            }
             div ul {
                 display: flex;
                 padding: 0px;
@@ -63,12 +119,50 @@
         }
         div.price {
             margin-bottom: 20px;
+            h1 {
+                font-size: 18px;
+            }
             span div {
                 margin: 5px 0px;
                 display: flex;
                 flex-direction: row;
-                
+                p {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin: 0px;
+                }
             }
         }
+        .info {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .tooltip {
+            position: relative;
+        }
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            top: -40px;
+            left: 170px;
+            font-size: 12px;
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+    }
+
+    .translucent {
+        opacity: 0.3;
     }
 }

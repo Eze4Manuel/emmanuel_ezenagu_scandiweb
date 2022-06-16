@@ -4,33 +4,105 @@ import './item.scss';
 import { Link } from 'react-router-dom';
 import cartWhite from '../../assets/images/cart-white.png'; // with import   
 import { connect } from 'react-redux';
-import { HeadingText, ParagraphText } from '../../components/Text/text';
+import { addToCart, incrementCounterByPosition } from '../../redux/actions/cartActions';
 
 class Item extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            setting: {}
+        }
+    }
+    componentDidMount() {
+        let tempObject = {}
+        this.setPredefinedSettings(this.props.data).forEach(elem => {
+            tempObject = { ...tempObject, ...elem }
+        })
+        this.setState((prevState) => {
+            return {
+                setting: tempObject
+            }
+        })
+    }
+    handleAddToCart = (e, data) => {
+        e.preventDefault();
+        let existingProducts = this.props.cart.products.filter((product, ind) => {
+            return (product.product.id === this.props.data.id)
+        })
+        let mapSettingsProduct = existingProducts.map(product => {
+            return product.setting
+        })
+        let checkMatch = mapSettingsProduct.every((elem) => {
+            return !(this.checkAttributeSettings(elem, this.state.setting));
+        });
+        if (checkMatch) {
+            this.props.addToCart({ product: this.props.data, setting: this.state.setting, counter: 1 })
+        } else {
+            // Since product already exist in the cart, increment at the position where the inserted object matches 
+            let temp = this.props.cart.products.findIndex(product => {
+                if ((product.product.id === this.props.data.id) && !(this.checkMatchAttributeSettings(product.setting, this.state.setting))) return true;
+                else return false
+            })
+            this.props.incrementCounterByPosition(temp);
+        }
+    }
+    setPredefinedSettings = (product) => {
+        return product.attributes.map(elem => {
+            return { [elem.name]: elem.items[0] }
+        })
+    }
+    checkAttributeSettings = (obj1, obj2) => {
+        let match = true;
+        Object.keys(obj2).forEach(function (key) {
+            if (obj2[key].id !== obj1[key].id) {
+                match = false
+            }
+        });
+        return match;
+    }
+    // checks if two objects have same id properties
+    checkMatchAttributeSettings = (obj1, obj2) => {
+        let match = true;
+        Object.keys(obj2).forEach(function (key) {
+            if (obj2[key].id === obj1[key].id) {
+                match = false
+            }
+        });
+        return match;
+    }
+
+
     render() {
         return (
             <div className='Item' id={this.props.data.id} >
-                {!this.props.data.inStock ? <HeadingText value={"Out of Stock"} styles={{ "fontWeight": "400", "fontSize": "24px", "position": "relative", "top": "35%" }} /> : null}
-                <Link to={`/product_details?id=${this.props.data.id}`}>
-                    <div className='item-container' style={!this.props.data.inStock ? { "opacity": "0.3" } : null}>
-                        <div
-                            className='item-image'
-                            style={{ backgroundImage: `url(${this.props.data.gallery[0]})` }}>
+
+                {!this.props.data.inStock ? <h1>Out of Stock</h1> : null}
+                <Link as='div' to={`/product_details?id=${this.props.data.id}`}>
+                    <div className={`item-container ${!this.props.data.inStock ? 'translucent' : null}`}>
+                        <div className='item-image'>
+                            <img src={this.props.data.gallery[0]} alt='item_image' />
                         </div>
-                        <span className='cart'>
+                        <span onClick={this.props.data.inStock ? (e) => this.handleAddToCart(e, this.props.data) : null} className='cart'>
                             <img src={cartWhite} alt="" />
                         </span>
-                        <HeadingText value={this.props.data.name} styles={{ "fontSize": "18px", "margin": "20px 0px 5px 0px", "textAlign": "left", "fontWeight": "300", "paddingLeft": "10px" }} />
-                        <div>
-                            <div><ParagraphText value={
-                                this.props.data.prices.find((elem) => {
-                                    return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                }).currency.symbol
-                                + " " +
-                                this.props.data.prices.find((elem) => {
-                                    return (elem.currency.symbol === this.props.selectedCurrency.state)
-                                }).amount
-                            } styles={{ "fontSize": "18px", "fontWeight": "bold", "marginBottom": "10px", "marginTop": "0px", "paddingLeft": "10px" }} />
+
+                        <div className='item-name'>
+                            <h1>{this.props.data.brand}</h1>
+                            <h1>{this.props.data.name}</h1>
+                        </div>
+                        <div className='item-price'>
+                            <div>
+                                <p>
+                                    {
+                                        this.props.data.prices.find((elem) => {
+                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                        }).currency.symbol
+                                        + " " +
+                                        this.props.data.prices.find((elem) => {
+                                            return (elem.currency.symbol === this.props.selectedCurrency.state)
+                                        }).amount
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -42,8 +114,9 @@ class Item extends React.Component {
 
 const mapStateToProps = state => ({
     selectedCurrency: state.selectedCurrency,
+    cart: state.cart,
 });
 
 export default connect(
-    mapStateToProps
+    mapStateToProps, { addToCart, incrementCounterByPosition }
 )(Item);

@@ -69,7 +69,9 @@
         }
     }
 }
-
+.Item:last-child {
+    margin-right: auto;
+}
 .Item:hover {
     box-shadow: 0px 4px 34px #a8acb030;
     div.item-container {

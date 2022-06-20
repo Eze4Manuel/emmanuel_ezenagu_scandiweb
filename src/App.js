@@ -58,11 +58,21 @@ class App extends Component {
       return { currencyDropDown: !prevState.currencyDropDown }
     })
   }
+  handleOutsideClick = (e) => {
+    e.stopPropagation();
+    if(this.state.currencyDropDown || this.state.cartDropDown){
+      this.setState((prevState) => {
+        return { currencyDropDown: false, cartDropDown: false }
+      })
+    }
+  }
+  handleBubbleClick = (e) => e.stopPropagation();     
+
 
   render() {
     return (
       <Router>
-        <div className="App">
+        <div className="App" onClick= {this.handleOutsideClick}>
           <Header categories={this.props.data.categories}
             changeCategory={this.changeCategory}
             showCurrency={this.showCurrency} showCart={this.showCart} />
@@ -71,7 +81,7 @@ class App extends Component {
             : null
           }
           {this.state.cartDropDown ?
-            <DropCart showCart={this.showCart} />
+            <DropCart showCart={this.showCart} handleBubbleClick={this.handleBubbleClick}/>
             : null
           }
           <MainContent>

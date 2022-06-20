@@ -19,7 +19,6 @@ class DropCart extends React.Component {
     componentDidMount() {
         this.culmulateSum();
     }
-
     culmulateSum = () => {
         // Loops through all the products and cummulates the total of all prices
         const total = [];
@@ -41,7 +40,7 @@ class DropCart extends React.Component {
     render() {
         return (
             <div className='Dropcart' open>
-                <div className='dropcart-container'>
+                <div className='dropcart-container' onClick={this.props.handleBubbleClick}>
                     <h1>{` My Bag, ${this.props?.cart.products.length} Item(s)`} </h1>
                     {
                         this.props?.cart.products.map((elem, ind) => {
@@ -51,7 +50,7 @@ class DropCart extends React.Component {
                                 key={uuidv4()}
                                 selectedCurrency={this.props.selectedCurrency}
                                 culmulateSum={this.culmulateSum}
-                                updateSettings={this.props.updateSettings}
+                                updateSettings={()=>{}}
                                 incrementCounterByPosition={this.props.incrementCounterByPosition}
                                 decrementCounterByPosition={this.props.decrementCounterByPosition}
                             />
